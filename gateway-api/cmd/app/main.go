@@ -41,14 +41,15 @@ func main() {
 	}
 	defer db.Close()
 
-	accontRepository := repository.NewAccountRepository(db)
-	accontService := service.NewAccountService(accontRepository)
+	accountRepository := repository.NewAccountRepository(db)
+	accountService := service.NewAccountService(accountRepository)
+
+	invoiceRepository := repository.NewInvoiceRepository(db)
+	invoiceService := service.NewInvoiceService(invoiceRepository, *accountService)
 
 	port := getEnv("HTTP_PORT", "8080")
-	srv := server.NewServer(accontService, port)
-	srv.ConfigureRouters()
-
-	srv.Start()
+	srv := server.NewServer(accountService, invoiceService, port)
+	srv.ConfigureRoutes()
 
 	if err := srv.Start(); err != nil {
 		log.Fatal("Error starting server: ", err)
