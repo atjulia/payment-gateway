@@ -3,7 +3,7 @@ package dto
 import (
 	"time"
 
-	"github.com/atjulia/pags/go-gateway/internal/domain"
+	"github.com/atjulia/payment-gateway/gateway-api/internal/domain"
 )
 
 type CreateAccountInput struct {

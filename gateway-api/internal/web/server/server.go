@@ -3,8 +3,8 @@ package server
 import (
 	"net/http"
 
-	"github.com/atjulia/pags/go-gateway/internal/service"
-	"github.com/atjulia/pags/go-gateway/internal/web/handlers"
+	"github.com/atjulia/payment-gateway/gateway-api/internal/service"
+	"github.com/atjulia/payment-gateway/gateway-api/internal/web/handlers"
 	"github.com/go-chi/chi/v5"
 )
 

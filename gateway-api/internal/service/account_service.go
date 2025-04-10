@@ -1,8 +1,8 @@
 package service
 
 import (
-	"github.com/atjulia/pags/go-gateway/internal/domain"
-	"github.com/atjulia/pags/go-gateway/internal/dto"
+	"github.com/atjulia/payment-gateway/gateway-api/internal/domain"
+	"github.com/atjulia/payment-gateway/gateway-api/internal/dto"
 )
 
 type AccountService struct {

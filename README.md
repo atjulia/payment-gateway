@@ -1,1 +1,1 @@
-# pags
+# payment-gateway

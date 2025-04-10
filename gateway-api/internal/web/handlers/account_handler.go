@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/atjulia/pags/go-gateway/internal/dto"
-	"github.com/atjulia/pags/go-gateway/internal/service"
+	"github.com/atjulia/payment-gateway/gateway-api/internal/dto"
+	"github.com/atjulia/payment-gateway/gateway-api/internal/service"
 )
 
 type AccountHandler struct {
@@ -37,7 +37,7 @@ func (h *AccountHandler) Create(w http.ResponseWriter, r *http.Request) {
 
 func (h *AccountHandler) Get(w http.ResponseWriter, r *http.Request) {
 	apiKey := r.Header.Get("X-API-Key")
-	if apiKey != "" {
+	if apiKey == "" {
 		http.Error(w, "X-API-Key header is required", http.StatusUnauthorized)
 		return
 	}
