@@ -1,0 +1,41 @@
+services:
+  nestjs:
+    build: .
+    ports:
+      - 3001:3000
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      - NODE_ENV=development
+      - DB_HOST=nestjs-db  # Usa o nome do serviço como host
+    depends_on:
+      nestjs-db:
+        condition: service_healthy
+    networks:
+      - go-gateway_default
+
+  nestjs-db:
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_DATABASE=gateway
+    ports:
+      - "3308:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - nest_mysql_data:/var/lib/mysql
+    networks:
+      - go-gateway_default
+    restart: unless-stopped
+
+networks:
+  go-gateway_default:
+    external: true
+
+volumes:
+  nest_mysql_data:
